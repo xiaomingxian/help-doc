@@ -1,0 +1,30 @@
+# Redis应用
+#### bitmap 用户连续登陆判断
+```
+登陆：
+
+            生产：拦截器拦截用户请求 当是非登出类型时 生产登陆类型的消息
+
+                       {  "action":3, "postId":0,"type":3,"userId":1121   }
+
+            消费：
+                     1. myql记录登陆记录，
+                     2.redis 更新用户连续登陆行为 
+                          bitmap
+                                a.日期作key 用户id作为偏移量
+
+                                b.计算连续登陆行为 多天(多少天参与根据最后一次奖励时间来判断)按位与操作 生成新的bitmap结果
+
+                                c.从新的bitmap中 用 用户id作为偏移量获取值 值==1 则认为是连续登陆
+
+                   3.eg:连续登陆3天逻辑
+                        setbit login-2021-12-15 1121 1
+
+                        setbit login-2021-12-16 1121 1
+
+                        setbit login-2021-12-17 1121 1
+
+                        bitop and loginmap2021012017-day3 login-2021-12-15 login-2021-12-16 login-2021-12-17  
+
+                        getbit loginmap2021012017-day3 1121 =>1 #认定为连续 登陆3天
+```
