@@ -1,0 +1,4 @@
+##### 1 retainAll 交集
+```
+ a.retainAll(b) #剔除a集合中元素不在b集合中的元素
+```
