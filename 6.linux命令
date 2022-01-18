@@ -1,0 +1,3 @@
+软连接 ln -s 源文件 目标文件
+
+清交换区（内存）echo 3 > /proc/sys/vm/drop_caches
