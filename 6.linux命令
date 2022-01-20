@@ -1,3 +1,12 @@
 软连接 ln -s 源文件 目标文件
 
 清交换区（内存）echo 3 > /proc/sys/vm/drop_caches
+
+
+删除日志
+```
+cat -n /data/logs/hr/dubbo/info.log |grep 'NullPointerException'
+查出所在行 608 
+sed -i '608d' /data/logs/hr/dubbo/info.log
+删掉 608 行
+```
