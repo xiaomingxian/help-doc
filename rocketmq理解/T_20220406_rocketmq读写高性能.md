@@ -35,11 +35,13 @@ topic/queueId(0)/多个磁盘文件
  解决：0丢失同步刷盘
  取舍：调低刷盘频率
  ```
- #### Broker busy 异常
+ #### Broker busy 异常 【transientStorePoolEnabled机制】
  ```
  场景：读写都非常频繁
  解决思路：将高并发写拆出去，走堆外内存，通过额外线程，定时刷到pageCache 减少了写并发
  实现：瞬时存储池(transientStorePoolEnabled)机制 执行过程如上
+ 此机制可能带来的新问题：增加了数据丢失的风险[调用链变长风险增加](eg:jvm蹦了堆外内存数据还未刷到pageCache)
+ 权衡
  ``` 
  
  
