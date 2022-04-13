@@ -25,7 +25,7 @@ topic/queueId(0)/多个磁盘文件
  [mapfile](https://www.jianshu.com/p/9bd672e1c5c1)
  ```
  1.commitLog 顺序写mapfile ( 映射pageCahce(内存) ) 【异步刷盘】
-    <1> : broker进程 突然崩溃数据也不会丢失，原因：pageCache由linux/或者其他OS(操作系统)管理 
+    <1> : broker进程 突然崩溃数据也不会丢失，原因：pageCache由linux/或者其他OS(操作系统)管理（LRU,...） 
     <2> : 服务器故障宕机 pageCache会丢失
  2.consumerQueue  异步写入 不影响客户端
  ```
@@ -35,6 +35,12 @@ topic/queueId(0)/多个磁盘文件
  解决：0丢失同步刷盘
  取舍：调低刷盘频率
  ```
+ #### Broker busy 异常
+ ```
+ 场景：读写都非常频繁
+ 解决思路：将高并发写拆出去，走堆外内存，通过额外线程，定时刷到pageCache 减少了写并发
+ 实现：瞬时存储池(transientStorePoolEnabled)机制 执行过程如上
+ ``` 
  
  
  
