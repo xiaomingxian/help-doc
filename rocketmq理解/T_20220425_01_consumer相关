@@ -1,0 +1,1 @@
+consumer启动会向每个broker注册自己，所以broker知道每个consumerGroup里都有哪些 broker
