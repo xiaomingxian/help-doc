@@ -1,1 +1,1 @@
-consumer启动会向每个broker注册自己，所以broker知道每个consumerGroup里都有哪些 broker
+consumer启动会向每个broker注册自己，所以broker知道每个consumerGroup里都有哪些 broker,同时consumer也能通过broker知道自己所处的group都有哪些其他的consumer
