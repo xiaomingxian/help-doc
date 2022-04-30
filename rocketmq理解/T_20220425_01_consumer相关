@@ -1,4 +1,5 @@
 #### 消费消息
+
 ```
 谁来负责 queue->consumer分配:consumer自己分配，consumer获取到queue后根据相同的算法来选择从哪个队列里消费
 
@@ -17,7 +18,9 @@ longPulling（长轮询）:push模式【挂起+每5s检查（后台线程），�
 
 
 ```
+
 #### push/pull区别
+
 ```
 
 源代码版本是3.2.6。在rocketmq里，consumer被分为2类：MQPullConsumer和MQPushConsumer，其实本质都是拉模式（pull），即consumer轮询从broker拉取消息。
